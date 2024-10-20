@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIDS Infographic</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #edd9cc;
+            --secondary-color: #b8a597;
+            --background-color: #9e122c;
+            --text-color: #2c3e50;
+            --logo-color: #b30000;
+            --pie-chartcolor: #dc2b37;
+            --bar-color: #c82732;
+            --pie-chartcolor2: #ee4a43;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, #fcecdf 0%, #fcecdf 100%);
+            box-shadow: 0 100px 300px rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--logo-color);
+            font-size: 4em;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .chart {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 60px;
+            height: 300px;
+            align-items: flex-end;
+        }
+        
+        .bar {
+            width: 25%;
+            background: linear-gradient(to top, var(--bar-color), #c82732);
+            border-radius: 15px 15px 0 0;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        .bar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .bar::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 40%,
+                rgba(255, 255, 255, 0) 60%
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        
+        .bar:hover::before {
+            top: -25%;
+            left: -25%;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease;
+        }
+        
+        .bar:hover .bar-value {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .pie-chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .pie-chart {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(var(--pie-chartcolor2) 0deg 126deg, var(--pie-chartcolor) 126deg 360deg);
+            margin-right: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .pie-chart:hover {
+            transform: scale(1.05) rotate(10deg);
+        }
+        
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .legend-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+         .legend-color2 {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+        }
+        
+        .stat {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff 0%, #fff 100%);
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        .stat:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .stat i {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--logo-color);
+            transition: all 0.5s ease;
+        }
+        
+        .stat:hover i {
+            transform: rotate(360deg) scale(1.2);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container > * {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .container > *:nth-child(1) { animation-delay: 0.2s; }
+        .container > *:nth-child(2) { animation-delay: 0.4s; }
+        .container > *:nth-child(3) { animation-delay: 0.6s; }
+        .container > *:nth-child(4) { animation-delay: 0.8s; }
+        .container > *:nth-child(5) { animation-delay: 1s; }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-ribbon"></i> AIDS Infographic</h1>
+        
+        <div class="chart">
+            <a href="https://www.unaids.org/en/resources/presscentre/pressreleaseandstatementarchive/2024/july/20240724_prevention" class="bar" style="height: 60%;">
+                <span class="bar-value">1.5 million</span>
+                <span class="bar-label">Mga bagong impeksyon sa HIV</span>
+            </a>
+            <a href="https://www.hiv.gov/hiv-basics/overview/data-and-trends/global-statistics#:~:text=AIDS%2Drelated%20Deaths%E2%80%94AIDS%2D,are%20disproportionately%20affected%20by%20HIV." class="bar" style="height: 100%;">
+                <span class="bar-value">38.4 million</span>
+                <span class="bar-label">Mga taong nabubuhay na may HIV</span>
+            </a>
+            <a href="https://www.unaids.org/en/regionscountries/countries/philippines" class="bar" style="height: 40%;">
+                <span class="bar-value">650,000</span>
+                <span class="bar-label">Kamatayan na may kaugnayan sa Aids</span>
+            </a>
+        </div>
+
+        <div class="pie-chart-container">
+            <a class="pie-chart"></a>
+            <div class="pie-legend">
+                <a class="legend-item">
+                    <div class="legend-color" style="background-color: var(--pie-chartcolor2);"></div>
+                    <span>35% ng mga tao sa buong mundo ay walang kamalayan sa katayuan ng HIV</span>
+                </a>
+                <a class="legend-item">
+                    <div class="legend-color" style="background-color: var(--pie-chartcolor);"></div>
+                    <span>65% ng mga tao sa buong mundo ay may kamalayan sa katayuan ng HIV</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="stat">
+            <a class="legend-item">
+            <i class="fas fa-pills"></i>
+            <p>73% ng mga taong may HIV ay nakatanggap ng antiretroviral therapy noong 2021</p>
+        </a>
+        </div>
+       
+
+        <div class="stat">
+            <a class="legend-item">
+            <i class="fas fa-heart-broken"></i>
+            <p>Ang AIDS ay kumitil ng 40.1 milyong buhay mula nang magsimula ang epidemya</p>
+        </a>
+        </div>
+        <footer>
+
+            <a href="aids.html">
+                <div class="legend-color2" style="background-color: var(--pie-chartcolor);">next</div></a>
+        </footer>
+</body>
+</html>
